@@ -1,0 +1,37 @@
+{
+  "name": "user-sign-in-up",
+  "version": "1.0.0",
+  "description": "API RESTful to user sign in/sign up with NodeJS, Express and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon .",
+    "test": "jest --config test.json --forceExit"
+  },
+  "dependencies": {
+    "express": "^4.12.3",
+    "nedb": "^1.8.0",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "jest": "^23.3.0",
+    "nodemon": "^1.15.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcastilho/user-sign-in-up.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Thiago Castilho",
+    "email": "tcastilho@outlook.com",
+    "url": "https://github.com/tcastilho/"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tcastilho/user-sign-in-up/issues"
+  },
+  "homepage": "https://github.com/tcastilho/user-sign-in-up#readme"
+}
