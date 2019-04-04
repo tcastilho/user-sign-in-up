@@ -9,48 +9,41 @@ const db = require('../../../config'),
 
 class Queries {
 
-  // Return only specified document number
-  findUser(doc) {
+  // Create a user
+  postUser(user) {
     return new Promise((resolve, reject) => {
-      db.find({document: doc}, (err, doc) => {
+      db.insert(user, (err, result) => {
         if (err)
-          reject(status.error)
-        resolve(doc)
+          reject(err)
+        resolve(result)
       })
     })
   }
 
-  // Update or insert the document number, with status Blacklist
-  updateBlacklisted(doc) {
+  // Return queried user
+  getUser(querie) {
     return new Promise((resolve, reject) => {
-      db.update({
-        document: doc
-      }, {
-        document: doc,
-        status: status.blacklist
-      }, {
-        upsert: true
-      }, (err, doc) => {
+      db.find(querie, (err, result) => {
         if (err)
-          reject(status.error)
-        resolve(doc)
+          reject(err)
+        resolve(result)
       })
     })
   }
 
-  // Update or insert the document number, with status Whitelist
-  updateWhitelisted(doc) {
+  // Update login time of queried user
+  patchUser(user) {
     return new Promise((resolve, reject) => {
       db.update({
-        document: doc
+        email: user
       }, {
-        document: doc,
-        status: status.whitelist
+        email: user,
+        ultimo_login: new Date()
       }, {
-        upsert: true
+        upsert: false
       }, (err, doc) => {
         if (err)
-          reject(status.error)
+          reject(err)
         resolve(doc)
       })
     })

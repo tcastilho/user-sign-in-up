@@ -8,15 +8,24 @@
  */
 
 const signinBO = require('../core/business-operation/signinBO'),
-  logger = require('../helpers/utils/logger.js');
+  token = require('../helpers/utils/token'),
+  logger = require('../helpers/utils/logger.js')
 
 const controller = async (req, res) => {
   logger.info('signinController')
   try {
-    const result = await signinBO.updateStatus(req)
+    await token.tokenValidation(req.header.token)
+
+    const email = req.body.email,
+      password = req.body.senha
+      user = {
+        email,
+        password
+      },
+      result = await signinBO.loginUser(user)
     return res.status(200).json(result)
   } catch (err) {
-    return res.status(500).json(err)
+    return res.status(err.status).json(err.message)
   }
 }
 

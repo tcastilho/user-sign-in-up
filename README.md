@@ -13,7 +13,9 @@ API RESTful to user sign in/sign up with NodeJS, Express and MongoDB
 | **Dependency** | **Use** |
 |----------|-------|
 |express|Fast, unopinionated, minimalist web framework for node|
+|jsonwebtoken|JSON Web Token implementation (symmetric and asymmetric)|
 |nedb|Embedded persistent or in memory database for Node.js, nw.js, Electron and browsers, 100% JavaScript, no binary dependency.|
+|uuid|RFC4122 (v1, v4, and v5) UUIDs|
 |winston|A multi-transport async logging library for node.js|
 
 ### Dependências de Desenvolvimento

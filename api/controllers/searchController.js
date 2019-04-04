@@ -1,22 +1,35 @@
 /**
  * 
  * @author Thiago Castilho
- * @date 2019-04-01
+ * @date 2019-04-04
  * 
  * @param {Object} req 
  * @param {Object} res 
  */
 
 const searchBO = require('../core/business-operation/searchBO'),
-  logger = require('../helpers/utils/logger.js');
+  token = require('../helpers/utils/token'),
+  logger = require('../helpers/utils/logger.js')
 
 const controller = async (req, res) => {
-  logger.info('searchController')
+  logger.info('signinController')
   try {
-    const result = await searchBO.updateStatus(req)
+    await token.tokenValidation(req.header.token)
+    
+    const bearer = req.body.bearer,
+      error = {
+        status: 401,
+        message: {
+          mensagem: 'Não autorizado'
+        }
+      }
+    if (bearer === '' || bearer === null || bearer === undefined)
+      throw error
+    
+    const result = await searchBO.getUser(user)
     return res.status(200).json(result)
   } catch (err) {
-    return res.status(500).json(err)
+    return res.status(err.status).json(err.message)
   }
 }
 
