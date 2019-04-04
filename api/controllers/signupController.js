@@ -15,7 +15,7 @@ const signupBO = require('../core/business-operation/signupBO'),
 const controller = async (req, res) => {
   logger.info('signupController')
   try {
-    const tokenHash = await token.tokenValidation(req.header.token),
+    const tokenHash = await token.tokenValidation(req.headers.token),
       user = userTransform.transform(req.body),
       result = await signupBO.createUser(user, tokenHash)
     return res.status(201).json(result)

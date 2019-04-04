@@ -15,7 +15,7 @@ const uuid = require('uuid/v1'),
 const createUser = (userData, token) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const search = await Queries.findUser({email: userData.email})
+      const search = await Queries.getUser({email: userData.email})
       if (search.length > 0)
         throw 'E-mail já existente'
 
@@ -30,12 +30,17 @@ const createUser = (userData, token) => {
           stringSalted: hashPassword.stringSalted
         }
       userData.senha = hashPassword.passwordHash
-      const uTransform = postTransform.transform(userData, infoData)
-      await Queries.postUser(uTransform)
-      const response = getTransform.transform(uTransform)
+      const uTransform = postTransform.transform(infoData, userData)
+      const result = await Queries.postUser(uTransform)
+      const response = getTransform.transform(result)
       resolve(response)
     } catch (err) {
-      reject({mensagem: err})
+      reject({
+        status: 401,
+        message: {
+          mensagem: err
+        }
+      })
     }
   })
 }

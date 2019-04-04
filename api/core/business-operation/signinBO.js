@@ -13,16 +13,16 @@ const hashPass = require('../../helpers/utils/saltHash'),
 const loginUser = (userData) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await Queries.findUser({email: userData.email})
+      const result = await Queries.getUser({email: userData.email})
       if (result.length === 0)
         throw 'Usuário e/ou senha inválidos'
 
-      const passwordVerification = hashPass.secureHash(userData.password, result.stringSalted)
-      if (result.senha !== passwordVerification)
+      const passwordVerification = hashPass.secureHash(userData.password, result[0].security)
+      if (result[0].senha !== passwordVerification.passwordHash)
         throw 'Usuário e/ou senha inválidos'
       
       await Queries.patchUser(userData.email)
-      const response = getTransform.transform(result)
+      const response = getTransform.transform(result[0])
       resolve(response)
     } catch (err) {
       reject({

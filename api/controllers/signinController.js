@@ -14,7 +14,7 @@ const signinBO = require('../core/business-operation/signinBO'),
 const controller = async (req, res) => {
   logger.info('signinController')
   try {
-    await token.tokenValidation(req.header.token)
+    await token.tokenValidation(req.headers.token)
 
     const email = req.body.email,
       password = req.body.senha

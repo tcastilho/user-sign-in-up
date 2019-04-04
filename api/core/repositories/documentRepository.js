@@ -4,8 +4,7 @@
  * @author Thiago Castilho
  * @date 2019-04-01
  */
-const db = require('../../../config'),
-  status = require('../../helpers/enums')
+const db = require('../../../config')
 
 class Queries {
 
@@ -41,10 +40,10 @@ class Queries {
         ultimo_login: new Date()
       }, {
         upsert: false
-      }, (err, doc) => {
+      }, (err, result) => {
         if (err)
           reject(err)
-        resolve(doc)
+        resolve(result)
       })
     })
   }

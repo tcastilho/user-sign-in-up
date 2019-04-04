@@ -7,6 +7,7 @@
 
 const express = require('express'),
   http = require('http'),
+  bodyParser = require('body-parser'),
   signIn = require('./api/routes/signinRoute'),
   signUp = require('./api/routes/signupRoute'),
   search = require('./api/routes/searchRoute')
@@ -16,6 +17,8 @@ const app = express()
 const hostname = process.env.HOSTNAME || 'localhost'
 const port = process.env.PORT || '8080'
 app.set('port', port)
+
+app.use(bodyParser.json({limit: '5mb'}))
 
 app.use('/signin', signIn)
 app.use('/signup', signUp)

@@ -14,9 +14,9 @@ const searchBO = require('../core/business-operation/searchBO'),
 const controller = async (req, res) => {
   logger.info('signinController')
   try {
-    await token.tokenValidation(req.header.token)
+    await token.tokenValidation(req.headers.token)
     
-    const bearer = req.body.bearer,
+    const bearer = req.headers.bearer,
       error = {
         status: 401,
         message: {
@@ -26,7 +26,7 @@ const controller = async (req, res) => {
     if (bearer === '' || bearer === null || bearer === undefined)
       throw error
     
-    const result = await searchBO.getUser(user)
+    const result = await searchBO.getUser(req)
     return res.status(200).json(result)
   } catch (err) {
     return res.status(err.status).json(err.message)
