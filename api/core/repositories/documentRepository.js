@@ -2,7 +2,7 @@
  * @description Class responsible for all queries in database
  * 
  * @author Thiago Castilho
- * @date 2019-02-17
+ * @date 2019-04-01
  */
 const db = require('../../../config'),
   status = require('../../helpers/enums')
