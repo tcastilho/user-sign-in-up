@@ -38,9 +38,7 @@ class Queries {
       }, {
         email: user,
         ultimo_login: new Date()
-      }, {
-        upsert: false
-      }, (err, result) => {
+      }, {}, (err, result) => {
         if (err)
           reject(err)
         resolve(result)
